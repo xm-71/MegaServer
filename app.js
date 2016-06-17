@@ -16,9 +16,20 @@ app.use(bodyParser.json());
 app.get('/', function(req, res) {
   Note
     .find()
+    .sort({ update_at: 'desc' })
     .then(function(notes) {
       res.json(notes);
     });
+});
+
+app.get('/:id', function(req, res) {
+  Note
+  .findOne({
+    _id:params.id
+  })
+  .then(function(note){
+    res.json(note);
+  });
 });
 
 app.post('/', function(reg,res){
