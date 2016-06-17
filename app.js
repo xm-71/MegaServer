@@ -7,6 +7,7 @@ var app = express();
 
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
   next();
 });
 
@@ -24,6 +25,14 @@ app.post('/', function(reg,res){
   var note = new Note({
     title: req.body.note.title,
     body_html: req.body.body_html
+  });
+  note
+  .save()
+  .then(function(noteData){
+    res.json({
+      message: 'Successfully updated note',
+      note: noteDate
+    });
   });
 });
 
